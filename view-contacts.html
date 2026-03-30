@@ -38,6 +38,93 @@
 <div id="detailsContent"></div>
 </div>
 </div>
+<script>
+  function loadEmployees() {
+let employees = localStorage.getItem('employees');
+employees = employees;
+JSON.parse(employees) ; [];
+ };
+ document.getElementById('totalCount').innerText = employees.length;
+ const tbody = document.getElementById('tableBody');
+tbody.innerHTML = '';
+if (employees.length === 0) {
+   tbody.innerHTML = '<tr><td colspan="5" class="empty">No employees found. Add one!</td></tr>';
+  return;
+}
+for (let i = 0; i < employees.length; i++) {
+const emp = employees[i];
+tbody.innerHTML += `
+<tr>
+<td>${emp.name || emp.fullName || 'N/A'}</td>
+<td>${emp.email || 'N/A'}</td>
+<td>${emp.phone || 'N/A'}</td>
+<td>${emp.department || 'N/A'}</td>
+<td>
+<button class="btn-details" onclick="viewDetails(${i})">Details</button>
+<button class="btn-edit" onclick="editEmployee(${i})">Edit</button>
+<button class="btn-delete" onclick="deleteEmployee(${i})">Delete</button>
+</td>
+</tr>
+`;
+}
+function viewDetails(index) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+let emp = employees[index];
+
+document.getElementById('detailsContent').innerHTML = `
+<p><strong>Name:</strong> ${emp.name || emp.fullName}</p>
+<p><strong>Email:</strong> ${emp.email}</p>
+<p><strong>Phone:</strong> ${emp.phone}</p>
+<p><strong>Department:</strong> ${emp.department}</p>
+<p><strong>Position:</strong> ${emp.position || 'N/A'}</p>
+`;
+document.getElementById('detailsModal').style.display = 'block';
+}
+function editEmployee(index) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+let emp = employees[index];
+
+let newName = prompt('Edit Name:', emp.name || emp.fullName);
+let newEmail = prompt('Edit Email:', emp.email);
+let newPhone = prompt('Edit Phone:', emp.phone);
+let newDept = prompt('Edit Department (IT/HR/Marketing/Sales/Finance):', emp.department);
+if (newName !== null && newEmail !== null && newPhone !== null && newDept !== null) {
+employees[index] = {
+...emp,
+name: newName,
+fullName: newName,
+email: newEmail,
+phone: newPhone,
+department: newDept
+};
+localStorage.setItem('employees', JSON.stringify(employees));
+alert('Employee updated successfully!');
+loadEmployees();
+}
+}
+function deleteEmployee(index) {
+let confirmDelete = confirm('Are you sure you want to delete?');
+            
+if (confirmDelete) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+employees.splice(index, 1);
+localStorage.setItem('employees', JSON.stringify(employees));
+alert('Employee deleted!');
+loadEmployees();
+} else {
+alert('Deletion cancelled');
+}
+}
+function closeModal() {
+document.getElementById('detailsModal').style.display = 'none';
+}
+window.onclick = function(event) {
+let modal = document.getElementById('detailsModal');
+if (event.target === modal) {
+modal.style.display = 'none';
+}
+}
+</script>
 
   <script src="main.js"></script>
 </body>
