@@ -84,3 +84,16 @@ alert('Employee updated successfully!');
 loadEmployees();
 }
 }
+function deleteEmployee(index) {
+let confirmDelete = confirm('Are you sure you want to delete?');
+            
+if (confirmDelete) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+employees.splice(index, 1);
+localStorage.setItem('employees', JSON.stringify(employees));
+alert('Employee deleted!');
+loadEmployees();
+} else {
+alert('Deletion cancelled');
+}
+}
