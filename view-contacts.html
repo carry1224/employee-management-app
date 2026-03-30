@@ -20,10 +20,25 @@
      </div>
 <table id="employeeTable">
 <thead>
-<tr><th>Name</th><th>Email</th><th>Phone</th><th>Department</th><th>Actions</th></tr>
+<tr><th>Name</th>
+  <th>Email</th> 
+  <th>Phone</th>
+  <th>Department</th>
+  <th>Actions</th>
+</tr>
 </thead>
  <tbody id="tableBody"></tbody>
 </div>
+<div id="detailsModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<span class="close" onclick="closeModal()">&times;</span>
+ <h2>Employee Details</h2>
+</div>
+<div id="detailsContent"></div>
+</div>
+</div>
+
   <script src="main.js"></script>
 </body>
 </html>

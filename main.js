@@ -20,3 +20,9 @@ else greeting = 'Good Evening! 🌙';
 if (heading && !heading.innerHTML.includes(greeting)) {
 heading.innerHTML = `${greeting}<br>${heading.innerHTML}`;
 }
+loadEmployees();
+function loadEmployees() {
+let employees = localStorage.getItem('employees');
+employees = employees;
+JSON.parse(employees) ; [];
+ };
