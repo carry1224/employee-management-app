@@ -29,3 +29,7 @@ JSON.parse(employees) ; [];
  document.getElementById('totalCount').innerText = employees.length;
  const tbody = document.getElementById('tableBody');
 tbody.innerHTML = '';
+if (employees.length === 0) {
+   tbody.innerHTML = '<tr><td colspan="5" class="empty">No employees found. Add one!</td></tr>';
+  return;
+}
