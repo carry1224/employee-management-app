@@ -26,3 +26,4 @@ let employees = localStorage.getItem('employees');
 employees = employees;
 JSON.parse(employees) ; [];
  };
+ document.getElementById('totalCount').innerText = employees.length;
