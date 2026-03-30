@@ -62,3 +62,25 @@ document.getElementById('detailsContent').innerHTML = `
 `;
 document.getElementById('detailsModal').style.display = 'block';
 }
+function editEmployee(index) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+let emp = employees[index];
+
+let newName = prompt('Edit Name:', emp.name || emp.fullName);
+let newEmail = prompt('Edit Email:', emp.email);
+let newPhone = prompt('Edit Phone:', emp.phone);
+let newDept = prompt('Edit Department (IT/HR/Marketing/Sales/Finance):', emp.department);
+if (newName !== null && newEmail !== null && newPhone !== null && newDept !== null) {
+employees[index] = {
+...emp,
+name: newName,
+fullName: newName,
+email: newEmail,
+phone: newPhone,
+department: newDept
+};
+localStorage.setItem('employees', JSON.stringify(employees));
+alert('Employee updated successfully!');
+loadEmployees();
+}
+}
