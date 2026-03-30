@@ -33,3 +33,19 @@ if (employees.length === 0) {
    tbody.innerHTML = '<tr><td colspan="5" class="empty">No employees found. Add one!</td></tr>';
   return;
 }
+for (let i = 0; i < employees.length; i++) {
+const emp = employees[i];
+tbody.innerHTML += `
+<tr>
+<td>${emp.name || emp.fullName || 'N/A'}</td>
+<td>${emp.email || 'N/A'}</td>
+<td>${emp.phone || 'N/A'}</td>
+<td>${emp.department || 'N/A'}</td>
+<td>
+<button class="btn-details" onclick="viewDetails(${i})">Details</button>
+<button class="btn-edit" onclick="editEmployee(${i})">Edit</button>
+<button class="btn-delete" onclick="deleteEmployee(${i})">Delete</button>
+</td>
+</tr>
+`;
+}
