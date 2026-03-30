@@ -49,3 +49,16 @@ tbody.innerHTML += `
 </tr>
 `;
 }
+function viewDetails(index) {
+let employees = JSON.parse(localStorage.getItem('employees')) || [];
+let emp = employees[index];
+
+document.getElementById('detailsContent').innerHTML = `
+<p><strong>Name:</strong> ${emp.name || emp.fullName}</p>
+<p><strong>Email:</strong> ${emp.email}</p>
+<p><strong>Phone:</strong> ${emp.phone}</p>
+<p><strong>Department:</strong> ${emp.department}</p>
+<p><strong>Position:</strong> ${emp.position || 'N/A'}</p>
+`;
+document.getElementById('detailsModal').style.display = 'block';
+}
