@@ -12,6 +12,18 @@
 <a href="new-contact.html">New Employee</a>
 <a href="view-contacts.html" class="active">View All</a>
 </div>
+<div class="container">
+  <h1>Employee List</h1>   
+    <div class="stats">
+      <span>Total: <b id="totalCount">0</b> employees</span>
+       <button onclick="loadEmployees()">Refresh</button>
+     </div>
+<table id="employeeTable">
+<thead>
+<tr><th>Name</th><th>Email</th><th>Phone</th><th>Department</th><th>Actions</th></tr>
+</thead>
+ <tbody id="tableBody"></tbody>
+</div>
   <script src="main.js"></script>
 </body>
 </html>
