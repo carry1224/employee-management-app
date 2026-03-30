@@ -7,3 +7,5 @@ links.forEach(link => {
         link.classList.add('active');
     }
 });
+const heading = document.getElementById('heading');
+const para = document.getElementById('para');
