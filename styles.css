@@ -63,3 +63,15 @@ input:focus, select:focus {
 outline: none;
 border-color: #4CAF50;
 }
+input.error, select.error {
+border-color: red;
+}
+.error-msg {
+color: red;
+font-size: 12px;
+margin-top: 5px;
+display: none;
+}
+.error-msg.show {
+display: block;
+}
