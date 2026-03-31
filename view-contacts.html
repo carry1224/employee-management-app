@@ -16,9 +16,15 @@
   <h1>Employee List</h1>   
     <div class="stats">
       <span>Total: <b id="totalCount">0</b> employees</span>
-       <button onclick="loadEmployees()">Refresh</button>
+      <div style="text-align: left;">
+  <button onclick="loadEmployees()" style="padding: 5px 10px; font-size: 12px;">
+    Refresh
+  </button>
+</div>
      </div>
 <table id="employeeTable">
+
+ <tbody id="tableBody">
 <thead>
 <tr><th>Name</th>
   <th>Email</th> 
@@ -26,8 +32,8 @@
   <th>Department</th>
   <th>Actions</th>
 </tr>
-</thead>
- <tbody id="tableBody"></tbody>
+ </thead>
+ </tbody>
 </div>
 <div id="detailsModal" class="modal">
 <div class="modal-content">
@@ -44,21 +50,22 @@ let employees = localStorage.getItem('employees');
 employees = employees;
 JSON.parse(employees) ; [];
  };
+ let employees = ["Bill"]; 
  document.getElementById('totalCount').innerText = employees.length;
  const tbody = document.getElementById('tableBody');
 tbody.innerHTML = '';
 if (employees.length === 0) {
    tbody.innerHTML = '<tr><td colspan="5" class="empty">No employees found. Add one!</td></tr>';
-  return;
+
 }
 for (let i = 0; i < employees.length; i++) {
 const emp = employees[i];
 tbody.innerHTML += `
 <tr>
-<td>${emp.name || emp.fullName || 'N/A'}</td>
-<td>${emp.email || 'N/A'}</td>
-<td>${emp.phone || 'N/A'}</td>
-<td>${emp.department || 'N/A'}</td>
+<td>${emp.name || emp.fullName || 'Bill Billy'}</td>
+<td>${emp.email || 'Bill@gmail.com'}</td>
+<td>${emp.phone || '+25412345678'}</td>
+<td>${emp.department || 'Sales'}</td>
 <td>
 <button class="btn-details" onclick="viewDetails(${i})">Details</button>
 <button class="btn-edit" onclick="editEmployee(${i})">Edit</button>
@@ -81,7 +88,9 @@ document.getElementById('detailsContent').innerHTML = `
 document.getElementById('detailsModal').style.display = 'block';
 }
 function editEmployee(index) {
-let employees = JSON.parse(localStorage.getItem('employees')) || [];
+  let confirmEdit = confirm('Are you sure you want to edit?');
+  if(confirmEdit){
+    let employees = JSON.parse(localStorage.getItem('employees')) || [];
 let emp = employees[index];
 
 let newName = prompt('Edit Name:', emp.name || emp.fullName);
@@ -96,11 +105,11 @@ fullName: newName,
 email: newEmail,
 phone: newPhone,
 department: newDept
-};
-localStorage.setItem('employees', JSON.stringify(employees));
-alert('Employee updated successfully!');
-loadEmployees();
-}
+  }
+  }
+  }else{
+    alert('Edit cancelled');
+  }
 }
 function deleteEmployee(index) {
 let confirmDelete = confirm('Are you sure you want to delete?');
@@ -131,8 +140,6 @@ font-family: Arial, sans-serif;
 margin: 20px;
 background:  #6ea1ee;
 }
-        
-
 .nav {
 background: #333;
 padding: 15px;
@@ -152,7 +159,6 @@ background: #555;
 .nav a.active {
 background: green;
 }
-
 .container {
 background: white;
 padding: 20px;
@@ -164,7 +170,6 @@ h1 {
 text-align: center;
 margin-bottom: 20px;
 }
-
 table {
 width: 100%;
 border-collapse: collapse;
@@ -182,7 +187,6 @@ border-bottom: 1px solid #ddd;
 tr:hover {
 background: #f5f5f5;
 }
-
 button {
 padding: 5px 10px;
 margin: 2px;
@@ -191,10 +195,8 @@ cursor: pointer;
 }
 .btn-details { background: blue; color: white; }
 .btn-edit { background: orange; color: white; }
-.btn-delete { background: red; color: white; }
-        
+.btn-delete { background: red; color: white; }       
 button:hover { opacity: 0.8; }
-
 .modal {
 display: none;
 position: fixed;
@@ -222,13 +224,11 @@ float: right;
 cursor: pointer;
 font-size: 25px;
 }
-
 .empty {
 text-align: center;
 padding: 40px;
 color: #999;
 }
-
 .stats {
 background: #e7f3ff;
 padding: 10px;
@@ -236,6 +236,16 @@ margin-bottom: 20px;
 display: flex;
 justify-content: space-between;
 }
+@media (max-width: 768px) {
+table, th, td {
+ font-size: 12px;
+}
+button {
+padding: 3px 6px;
+font-size: 11px;
+}
+}
+
 </style>
 
   <script src="main.js"></script>
